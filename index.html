@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To Phakwan</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Segoe UI, sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#ffc0e6;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    width:360px;
+}
+
+/* GIF */
+.gif-box img{
+    width:200px;
+    border-radius:12px;
+    margin:15px 0;
+    transition:0.3s;
+}
+
+/* ปุ่ม */
+button{
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    background:#ff4fa3;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+/* กล่อง */
+.box{
+    margin-top:15px;
+    background:#ffe4f3;
+    border:3px solid #ff4fa3;
+    border-radius:15px;
+    padding:20px;
+    font-weight:bold;
+    color:#ff4fa3;
+    font-size:20px;
+    width:220px;
+    margin-left:auto;
+    margin-right:auto;
+    transition:0.35s;
+    cursor:pointer;
+}
+
+#alertText{
+    margin-top:10px;
+    font-size:18px;   /* จาก 14 → 18 */
+    color:#ff4fa3;
+    min-height:22px;
+    font-weight:600;  /* เพิ่มให้เด่นขึ้น */
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1 style="color:#ff4fa3;">To Phakwan</h1>
+<p style="font-size:20px;">ไปไหนอ่ะ</p>
+
+<!-- GIF -->
+<div class="gif-box">
+<img id="mainGif" src="miss-you.gif">
+</div>
+
+<button id="secretBtn" onclick="growBox()">เรื่องของกุ</button>
+
+<div id="bigBox" class="box" onclick="changeGif()">
+ไม่ได้ไปหนายย
+</div>
+
+<div id="alertText"></div>
+
+</div>
+
+<script>
+
+let clickCount = 0;
+let boxWidth = 220;
+let boxFont = 20;
+
+let btnFont = 20;
+let btnPadding = 12;
+
+const messages = [
+"ไม่บอกหน่อยหรอ",
+"บ่อยหน่อยน้าาา",
+"ไม่บอกจริงๆหรอ",
+"ฮือเส้าา",
+"ไม่ต้องมีแล่วช่องเนี้ยย"
+];
+
+function growBox(){
+
+clickCount++;
+
+boxWidth += 25;
+boxFont += 4;
+
+let box = document.getElementById("bigBox");
+box.style.width = boxWidth + "px";
+box.style.fontSize = boxFont + "px";
+
+/* ปุ่มเล็กลง */
+btnFont -= 2;
+btnPadding -= 2;
+
+let btn = document.getElementById("secretBtn");
+
+if(btnFont > 8){
+btn.style.fontSize = btnFont + "px";
+btn.style.padding = btnPadding + "px " + (btnPadding+8) + "px";
+}
+
+/* ข้อความ */
+if(clickCount <= 5){
+document.getElementById("alertText").innerHTML = messages[clickCount-1];
+}else{
+document.getElementById("alertText").innerHTML = "";
+}
+
+/* ครั้งที่ 5 ปุ่มหาย */
+if(clickCount == 5){
+btn.style.display = "none";
+}
+
+}
+
+/* เปลี่ยน GIF */
+function changeGif(){
+document.getElementById("mainGif").src = "love-you.gif";
+}
+
+</script>
+
+</body>
+</html>
